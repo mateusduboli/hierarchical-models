@@ -1,0 +1,17 @@
+/* Instruções */
+
+Necessário Instalar: freeglut3 / freeglut3-dev
+
+Para compilar basta rodar o arquivo compilar.sh
+
+e depois dar um ./modelo.exe
+
+Atalhos:
+
+'1': Mudar GL_FLAT/GLSMOOTH
+'2': Mudar Wire/Solid
+'a': Girar para a esquerda
+'d': Girar para a direita
+'espaço': Mudar caminhada / corrida
+
+

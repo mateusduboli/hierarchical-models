@@ -1,6 +1,7 @@
 #include <GL/glut.h>
 #include <GL/freeglut.h>
 #include <stdio.h>
+#include "elephant.h"
 
 const int GL_WIDTH  = 400;
 const int GL_HEIGHT = 400;
@@ -35,27 +36,30 @@ void movementKeys(int key, int x, int y)
 
 void draw()
 {
-    glPushMatrix();
-    glutSolidCylinder(0.7, 0.7, 16, 16);
-    glPopMatrix();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearColor(1.0f, 0, 0, 1.0f);
+    glLoadIdentity();
+    elephant();
+    glutSwapBuffers();
+}
+
+int initWindow(int argc, char** argv)
+{
+    glutInitWindowSize(GL_HEIGHT, GL_WIDTH);
+    glutInitWindowPosition(0, 0);
+    glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
+    glutInit(&argc, argv);
+
+    return glutCreateWindow("INE5420 - Modelos Hierarquicos");
 }
 
 int main(int argc, char** argv)
 {
-    glutInitWindowSize(GL_HEIGHT, GL_WIDTH);
-    glutInitWindowPosition(0, 0);
-    glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
-    glutInit(&argc, argv);
+    window = initWindow(argc, argv);
 
-    window = glutCreateWindow("INE5420 - Modelos Hierarquicos");
     glutKeyboardFunc(&commandKeys);
     glutSpecialFunc(&movementKeys);
-
-    glClearColor(0.5f, 0.5f, 0.5f, 1.0);
-    glClearDepth(1.0f);
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LEQUAL);
-    glLoadIdentity();
+    glutDisplayFunc(&draw);
 
     glutMainLoop();
     return 0;

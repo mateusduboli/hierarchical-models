@@ -1,0 +1,21 @@
+double walk_angles[15][8] = {
+		// 90 significa que a perna está a 90 graus relativo ao corpo.
+		/* LEFT FRONT UPPER LEG JOINT 	*/{90+40 ,90+20 ,90 ,90-20 ,90 ,90+20 ,90+40 ,90+60},
+		/* RIGHT FRONT UPPER LEG JOINT 	*/{90 ,90+20 ,90+40 ,90+60 ,90+40 ,90+20 ,90 ,90-20},
+		/* LEFT BACK UPPER LEG JOINT 	*/{90-60,90-40,90-20,90,90+20,90,90-20,90-40},
+		/* RIGHT BACK UPPER LEG JOINT 	*/{90+20,90,90-20,90-40,90-60,90-40,90-20,90},
+
+		/* LEFT FRONT LOWER LEG JOINT 	*/{ -20,0,0,0,-20,-40,-60,-40 },
+		/* RIGHT FRONT LOWER LEG JOINT 	*/{ -20,-40,-60,-40,-20,0,0,0 },
+		/* LEFT BACK LOWER LEG JOINT 	*/{ 60,80,60,30,0,0,0,30},
+		/* RIGHT BACK LOWER LEG JOINT 	*/{ 0,0,0,30,60,80,60,30 },
+
+		/* LEFT FRONT PAW JOINT 	*/{ -20,0,0,0,-20,-40,-60,-40 },
+		/* RIGHT FRONT PAW JOINT 	*/{ -20,-40,-60,-40,-20,0,0,0 },
+		/* LEFT BACK PAW JOINT 		*/{-60,-80,-60,-30,0,0,0,-30},
+		/* RIGHT BACK PAW JOINT 	*/{ 0,0,0,-30,-60,-80,-60,-30 },
+
+		/* TAIL				*/{ 55,65,65,65,55,65,65,65 },
+		/* TRUNK 			*/{ 0,0,0,0,0,0,0,0 },
+		/* HEAD 			*/{ 0,0,0,0,0,0,0,0 }
+};
