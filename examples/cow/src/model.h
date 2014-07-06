@@ -162,12 +162,6 @@ void trunk(){
 		//glutSetColor(1,1.0, 0.1, 1.0);
 		//glClearIndex(1.0);
 		drawTrunk();
-		neck();
-		upperLegJoint(LEFT_BACK);
-		upperLegJoint(RIGHT_BACK);
-		upperLegJoint(LEFT_FRONT);
-		upperLegJoint(RIGHT_FRONT);
-		tailBase();
 	glPopMatrix();
 }
 

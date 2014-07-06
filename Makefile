@@ -1,16 +1,16 @@
-LDLIBS=-lm -lglut -lgl
-LDFLAGS=-L'/usr/X11/lib'
-CXXFLAGS=-I'/usr/X11/include'
-CFLAGS=-I'/usr/X11/include'
+LDLIBS= -lm -lglut -lgl
+LDFLAGS= -L'/usr/X11/lib'
+CFLAGS= -I'include' -I'/usr/X11/include'
+TARGET=model
 
-TARGET=main
+vpath %.c src
 
 all: $(TARGET)
 
-main: elephant.o main.o
+${TARGET}: movement.o wire_elephant.o 
 
 run: all
 	./$(TARGET)
 
 clean: 
-	rm *.o $(TARGET)
+	rm -rf *.o $(TARGET)
