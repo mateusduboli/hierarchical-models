@@ -9,7 +9,8 @@
 extern const int FRAMES;
 
 typedef enum {
-    SHOULDER
+    SHOULDER,
+    THIGHTS
 } BodyPart;
 
 double movementAngle(BodyPart part, int index, int frame);

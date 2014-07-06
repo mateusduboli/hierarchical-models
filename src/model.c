@@ -6,7 +6,7 @@
 
 const int GL_HEIGHT = 400;
 const int GL_WIDTH  = GL_HEIGHT;
-const int TIMER_INTERVAL = 200;
+const int TIMER_INTERVAL = 500;
 
 int window = 0;
 int angle = 0;
