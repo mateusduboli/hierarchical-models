@@ -14,4 +14,5 @@ typedef enum {
 } BodyPart;
 
 double movementAngle(BodyPart part, int index, int frame);
+double displacement(BodyPart part, int index, int frame);
 #endif // __MOVEMENT__

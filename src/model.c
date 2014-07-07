@@ -2,7 +2,8 @@
 #include <GL/freeglut.h>
 
 #include <stdio.h>
-#include "wire_elephant.h"
+//#include "wire_elephant.h"
+#include "solid_elephant.h"
 
 const int GL_HEIGHT = 400;
 const int GL_WIDTH  = GL_HEIGHT;
@@ -46,10 +47,32 @@ void movementKeys(int key, int x, int y)
     printf("H: %i deg\n", angle);
 }
 
+void draw_floor()
+{
+    glPushMatrix();
+        glTranslatef(0.0, -ELEPHANT_HEIGHT, 0.0);
+        glBegin(GL_POLYGON);
+            glColor3f(0.0, 1.0, 0.0);
+            glVertex3d(-1.0, 1.0, -1.0);
+            glColor3f(1.0, 0.0, 0.0);
+            glVertex3d(-1.0, 1.0, 1.0);
+            glColor3f(0.0, 0.0, 1.0);
+            glVertex3d(1.0, 1.0, 1.0);
+            glColor3f(0.0, 0.5, 1.0);
+            glVertex3d(1.0, 1.0, -1.0);
+            glColor3f(0.0, 1.0, 1.0);
+            glVertex3d(-1.0, -1.0, 1.0);
+            //glVertex3d(-1.0, -1.0, -1.0);
+            //glVertex3d(1.0, -1.0, 1.0);
+            //glVertex3d(1.0, -1.0, -1.0);
+        glEnd();
+    glPopMatrix();
+}
+
 void draw()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glClearColor(0, 0, 0, 1.0f);
+    glClearColor(1, 1, 1, 1.0f);
     glLoadIdentity();
     glRotatef(angle, 0.0, 1.0, 0.0);
     elephant(frame, param);

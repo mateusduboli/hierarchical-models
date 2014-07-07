@@ -1,4 +1,4 @@
-#include "wire_elephant.h"
+#include "solid_elephant.h"
 
 int _frame = 0;
 
@@ -92,7 +92,7 @@ void elephant(int frame, double param)
     _frame = frame;
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-        glColor3f(1.0, 0.0, 0.0);
+        glColor3f(0.8, 0.8, 0.8);
         glBegin(GL_LINES);
             glVertex3d(TORSO_WIDTH, TORSO_HEIGHT, 0.0);
             glVertex3d(-TORSO_WIDTH, TORSO_HEIGHT, 0.0);

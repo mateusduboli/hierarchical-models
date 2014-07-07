@@ -39,7 +39,7 @@ double thigthsAngle(int index, int frame)
     else
         return 0.0;
 }
-double bodyDisplacement(int index, int frame)
+double displacement(BodyPart part, int index, int frame)
 {
     return 0.0;
 }

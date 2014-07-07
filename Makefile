@@ -7,7 +7,7 @@ vpath %.c src
 
 all: $(TARGET)
 
-${TARGET}: movement.o wire_elephant.o 
+${TARGET}: movement.o solid_elephant.o 
 
 run: all
 	./$(TARGET)

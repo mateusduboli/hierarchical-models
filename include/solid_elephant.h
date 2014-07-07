@@ -6,9 +6,9 @@
 #include <GL/gl.h>
 #include <GL/glut.h>
 
-#include "traits.h"
 #include "sizes.h"
+#include "movement.h"
 
-void elephant(double param);
+void elephant(int frame, double param);
 
 #endif // __ELEPHANT__
