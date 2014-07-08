@@ -2,16 +2,16 @@
 #include <GL/freeglut.h>
 
 #include <stdio.h>
-//#include "wire_elephant.h"
-#include "solid_elephant.h"
+#include "elephant.h"
 
 const int GL_HEIGHT = 400;
 const int GL_WIDTH  = GL_HEIGHT;
-const int TIMER_INTERVAL = 500;
+const int TIMER_INTERVAL = 100;
 
 int window = 0;
 int angle = 0;
 int frame = 0;
+int WIRED = 0;
 
 double param = 0.1;
 
@@ -21,6 +21,9 @@ void commandKeys(unsigned char key, int x, int y)
         case 'q':
             glutDestroyWindow(window);
             glutLeaveMainLoop();
+            break;
+        case 's':
+            WIRED = 1 - WIRED;
             break;
         case 'a':
             param+=0.01;
@@ -75,7 +78,21 @@ void draw()
     glClearColor(1, 1, 1, 1.0f);
     glLoadIdentity();
     glRotatef(angle, 0.0, 1.0, 0.0);
-    elephant(frame, param);
+    glRotated(0, 1, 0, 0);
+    glPushMatrix();
+    glBegin(GL_LINES);
+        glColor3d(1.0, 0, 0);
+        glVertex3d(-1.0, 0, 0);
+        glVertex3d(1.0, 0, 0);
+        glColor3d(0, 1, 0);
+        glVertex3d(0, -1.0, 0);
+        glVertex3d(0, 1, 0);
+        glColor3d(0, 0, 1);
+        glVertex3d(0, 0, -1);
+        glVertex3d(0, 0, 1);
+    glEnd();
+    glPopMatrix();
+    elephant(WIRED, frame, param);
     glutSwapBuffers();
 }
 

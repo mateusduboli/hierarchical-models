@@ -1,5 +1,5 @@
-#ifndef __ELEPHANT__
-#define __ELEPHANT__
+#ifndef __WIRE_ELEPHANT__
+#define __WIRE_ELEPHANT__
 
 #include <math.h>
 
@@ -9,6 +9,6 @@
 #include "sizes.h"
 #include "movement.h"
 
-void elephant(int frame, double param);
+void wire_elephant(int frame, double param);
 
-#endif // __ELEPHANT__
+#endif // __WIRE_ELEPHANT__

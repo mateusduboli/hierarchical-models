@@ -2,7 +2,7 @@
 
 int _frame = 0;
 
-void feet(int index, double param)
+void wire_feet(int index, double param)
 {
     glPushMatrix();
         glBegin(GL_LINES);
@@ -14,7 +14,7 @@ void feet(int index, double param)
     glPopMatrix();
 }
 
-void thighs(int index, double param)
+void wire_thighs(int index, double param)
 {
     glPushMatrix();
         glBegin(GL_LINES);
@@ -24,11 +24,11 @@ void thighs(int index, double param)
         glTranslatef(0.0, -THIGHS_HEIGHT, 0.0);
         glutSolidSphere(JOINT_SIZE, 30, 30);
         glRotatef(movementAngle(THIGHTS, index, _frame), 0.0, 0.0, 1.0);
-        feet(index, param);
+        wire_feet(index, param);
     glPopMatrix();
 }
 
-void shoulder(int index, double param)
+void wire_shoulder(int index, double param)
 {
     glPushMatrix();
         double displac = displacement(SHOULDER, index, _frame);
@@ -39,11 +39,11 @@ void shoulder(int index, double param)
         glTranslatef(0.0, -SHOULDER_HEIGHT-displac, 0.0);
         glutSolidSphere(JOINT_SIZE, 30, 30);
         glRotatef(movementAngle(SHOULDER, index, _frame), 0.0, 0.0, 1.0);
-        thighs(index, param);
+        wire_thighs(index, param);
     glPopMatrix();
 }
 
-void trunk(double param)
+void wire_trunk(double param)
 {
     glPushMatrix();
         glBegin(GL_LINES);
@@ -62,7 +62,7 @@ void trunk(double param)
         glPopMatrix();
     glPopMatrix();
 }
-void head(double param)
+void wire_head(double param)
 {
     glPushMatrix();
         glBegin(GL_LINES);
@@ -71,11 +71,11 @@ void head(double param)
         glEnd();
         glTranslatef(HEAD_WIDTH/2, -HEAD_WIDTH/2, 0.0);
         glutSolidSphere(JOINT_SIZE, 30, 30);
-        trunk(param);
+        wire_trunk(param);
     glPopMatrix();
 }
 
-void tail(double param)
+void wire_tail(double param)
 {
     glPushMatrix();
         glBegin(GL_LINES);
@@ -87,7 +87,7 @@ void tail(double param)
     glPopMatrix();
 }
 
-void elephant(int frame, double param)
+void wire_elephant(int frame, double param)
 {
     _frame = frame;
     glMatrixMode(GL_MODELVIEW);
@@ -100,19 +100,19 @@ void elephant(int frame, double param)
         glPushMatrix();
             glTranslatef(TORSO_WIDTH, TORSO_HEIGHT, 0.0);
             glutSolidSphere(JOINT_SIZE, 30, 30);
-            head(param);
+            wire_head(param);
         glPopMatrix();
         glPushMatrix();
             glTranslatef(-TORSO_WIDTH, TORSO_HEIGHT, 0.0);
             glutSolidSphere(JOINT_SIZE, 30, 30);
-            tail(param);
+            wire_tail(param);
         glPopMatrix();
         for(int i = 0; i < 4; i++) {
             glPushMatrix();
                 int a = pow(-1, i);
                 int b = pow(-1, floor(i/2));
                 glTranslatef(a*TORSO_WIDTH, TORSO_HEIGHT, b*TORSO_DEPTH);
-                shoulder(i, param);
+                wire_shoulder(i, param);
             glPopMatrix();
         }
     glPopMatrix();
