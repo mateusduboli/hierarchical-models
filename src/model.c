@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "elephant.h"
 
-const int GL_HEIGHT = 400;
+const int GL_HEIGHT = 500;
 const int GL_WIDTH  = GL_HEIGHT;
 const int TIMER_INTERVAL = 100;
 
