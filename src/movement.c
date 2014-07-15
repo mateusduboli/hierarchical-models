@@ -9,7 +9,7 @@ double shoulderAngle(int index, int frame)
     double FRAME_STEP = 2*MAX_ANGLE/SECTION_SIZE;
 
     int i = frame;
-    if (index == FRONT_LEFT || index == BACK_RIGHT)
+    if (index == FRONT_RIGHT || index == BACK_RIGHT)
         i += SECTION_SIZE;
 
     i %= FRAMES;
@@ -27,7 +27,7 @@ double thigthsAngle(int index, int frame)
     double FRAME_STEP = MAX_ANGLE/SECTION_SIZE;
 
     int i = frame;
-    if (index == FRONT_LEFT || index == BACK_RIGHT)
+    if (index == FRONT_RIGHT || index == BACK_RIGHT)
         i += FRAMES/2;
 
     i %= FRAMES;

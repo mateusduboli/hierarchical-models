@@ -7,7 +7,11 @@ void feet(int index, int frame, double param)
             glVertex3d(0.0, 0.0, 0.0);
             glVertex3d(0.0, -FEET_HEIGHT, 0.0);
         glEnd();
-        glTranslatef(0.0, -FEET_HEIGHT, 0.0);
+        glPushMatrix();
+            glRotated(90, 0, 0, 0);
+            glutSolidCylinder(JOINT_SIZE, FEET_HEIGHT, 20, 20);
+        glPopMatrix();
+        glTranslatef(0.0, -FEET_HEIGHT - JOINT_SIZE, 0.0);
         glutSolidSphere(JOINT_SIZE, 30, 30);
     glPopMatrix();
 }
@@ -19,8 +23,13 @@ void thighs(int index, int frame, double param)
             glVertex3d(0.0, 0.0, 0.0);
             glVertex3d(0.0, -THIGHS_HEIGHT, 0.0);
         glEnd();
-        glTranslatef(0.0, -THIGHS_HEIGHT, 0.0);
+        glPushMatrix();
+            glRotated(90, 0, 0, 0);
+            glutSolidCylinder(JOINT_SIZE, THIGHS_HEIGHT, 20, 20);
+        glPopMatrix();
+        glTranslatef(0.0, -THIGHS_HEIGHT - JOINT_SIZE, 0.0);
         glutSolidSphere(JOINT_SIZE, 30, 30);
+        glTranslated(0.0, -JOINT_SIZE, 0.0);
         glRotatef(movementAngle(THIGHTS, index, frame), 0.0, 0.0, 1.0);
         feet(index, frame, param);
     glPopMatrix();
@@ -29,12 +38,9 @@ void thighs(int index, int frame, double param)
 void shoulder(int index, int frame, double param)
 {
     glPushMatrix();
-        glBegin(GL_LINES);
-            glVertex3d(0.0, 0.0, 0.0);
-            glVertex3d(0.0, -SHOULDER_HEIGHT, 0.0);
-        glEnd();
-        glTranslatef(0.0, -SHOULDER_HEIGHT, 0.0);
+        glTranslatef(0.0, -SHOULDER_HEIGHT -JOINT_SIZE, 0.0);
         glutSolidSphere(JOINT_SIZE, 30, 30);
+        glTranslatef(0.0, -JOINT_SIZE, 0.0);
         glRotatef(movementAngle(SHOULDER, index, frame), 0.0, 0.0, 1.0);
         thighs(index, frame, param);
     glPopMatrix();
@@ -68,6 +74,7 @@ void trunk(int frame, double param)
         glPopMatrix();
     glPopMatrix();
 }
+
 void head(int frame, double param)
 {
     glPushMatrix();
@@ -115,10 +122,10 @@ void solid_elephant(int frame, double param)
         glEnd();
 
         glPushMatrix();
-            glTranslated(-TORSO_WIDTH * 0.5, TORSO_HEIGHT, 0.0);
-            glScaled(1.0, 1.0, 7 * TORSO_DEPTH);
+            glTranslated(-TORSO_WIDTH * 0.5, TORSO_HEIGHT * 0.5, 0.0);
+            glScaled(1.0, 1.0, 0.9); //Proportion between depth and Width
             glRotated(90, 0.0, 1.0, 0.0);
-            glutSolidCylinder(TORSO_HEIGHT*0.5, TORSO_WIDTH, 20, 20);
+            glutSolidCylinder(TORSO_HEIGHT, TORSO_WIDTH, 10, 10);
         glPopMatrix();
 
         glPushMatrix();
@@ -137,6 +144,10 @@ void solid_elephant(int frame, double param)
                 int a = pow(-1, i);
                 int b = pow(-1, floor(i/2));
                 glTranslatef(a*TORSO_WIDTH * 0.5, TORSO_HEIGHT, b*TORSO_DEPTH);
+                glBegin(GL_LINES);
+                    glVertex3d(0.0, 0, -b*TORSO_DEPTH);
+                    glVertex3d(0.0, -SHOULDER_HEIGHT, 0.0);
+                glEnd();
                 shoulder(i,frame, param);
             glPopMatrix();
         }
