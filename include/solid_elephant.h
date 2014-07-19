@@ -10,7 +10,7 @@
 
 #include "sizes.h"
 #include "movement.h"
-
+typedef enum { RIGHT, LEFT } Side;
 void solid_elephant(int frame, double param);
 
 #endif // __SOLID_ELEPHANT__
