@@ -11,14 +11,19 @@ const int GL_HEIGHT = 500;
 const int GL_WIDTH  = GL_HEIGHT;
 const int TIMER_INTERVAL = 100;
 const int ANGLE_STEP = 2;
+const double CAMERA_STEP = 0.5;
+const double PARAM_STEP = 0.1;
 
 int window = 0;
 int angle = 0;
 int ver_angle = 0;
+double camera_x = 0;
+double camera_y = 0;
+double camera_z = 0;
 int frame = 0;
 bool isWired = false;
 
-double param = 0.1;
+double param = 0.0;
 
 void commandKeys(unsigned char key, int x, int y)
 {
@@ -31,45 +36,51 @@ void commandKeys(unsigned char key, int x, int y)
             isWired = !isWired;
             break;
         case 'a':
-            param+=0.01;
+            param+=PARAM_STEP;
             break;
         case 'd':
-            param-=0.01;
+            param-=PARAM_STEP;
+            break;
+        case 'z':
+            camera_z+=CAMERA_STEP;
+            break;
+        case 'x':
+            camera_z-=CAMERA_STEP;
             break;
     }
-    printf("param: %f\n", param);
+    printf("Camera Pos (%f, %f, %f)\n", camera_x, camera_y, camera_z);
 }
 
 void movementKeys(int key, int x, int y)
 {
     switch(key) {
         case GLUT_KEY_RIGHT:
-            angle+=ANGLE_STEP;
-            angle%=360;
+            camera_x+=CAMERA_STEP;
             break;
         case GLUT_KEY_LEFT:
-            angle-=ANGLE_STEP;
-            angle%=360;
+            camera_x-=CAMERA_STEP;
             break;
         case GLUT_KEY_UP:
-            ver_angle+=ANGLE_STEP;
-            ver_angle%=360;
+            camera_y+=CAMERA_STEP;
             break;
         case GLUT_KEY_DOWN:
-            ver_angle-=ANGLE_STEP;
-            ver_angle%=360;
+            camera_y-=CAMERA_STEP;
             break;
     }
-    printf("H: %i deg\n", angle);
+    printf("Camera Pos (%f, %f, %f)\n", camera_x, camera_y, camera_z);
 }
 
 void drawFloor()
 {
     glPushMatrix();
-        glTranslated(0.0, -ELEPHANT_HEIGHT, 0.0);
-        glColor3d(0, 1, 0);
-        glScaled(2.0, 1, 2.0);
-        glutSolidCube(1.0);
+        glTranslated(0, -ELEPHANT_HEIGHT, 0);
+        glColor3d(0.0, 123.0/256, 12.0/256);
+        glBegin(GL_QUADS);
+            glVertex3d(-100, 0, -100);
+            glVertex3d(-100, 0, 100);
+            glVertex3d(100, 0, 100);
+            glVertex3d(100, 0, -100);
+        glEnd();
     glPopMatrix();
 }
 
@@ -77,7 +88,7 @@ void initProjection()
 {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(6, 6, 6, 6, 6, 6);
+    gluPerspective(60, 1, 1, 1000);
 }
 
 void initLights()
@@ -90,9 +101,9 @@ void initLights()
     glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
     glLightfv(GL_LIGHT0, GL_POSITION, position);
 
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
-    glEnable(GL_COLOR_MATERIAL);
+    //glEnable(GL_LIGHTING);
+    //glEnable(GL_LIGHT0);
+    //glEnable(GL_COLOR_MATERIAL);
 }
 
 void drawAxis()
@@ -115,11 +126,14 @@ void drawAxis()
 void draw()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glClearColor(1, 1, 1, 1.0f);
+    glMatrixMode(GL_MODELVIEW);
+    //glClearColor(1, 1, 1, 1.0f);
     glLoadIdentity();
-    glRotated(angle, 0.0, 1.0, 0.0);
-    glRotated(ver_angle, 0.0, .0, 1.0);
-    drawAxis();
+    gluLookAt(0, 0, 2, 0, 0, 0, 0, 1, 0);
+    glRotated(camera_x, 0, 1, 0);
+    glRotated(camera_y, 1, 0, 0);
+
+    //drawAxis();
     drawFloor();
     elephant(isWired, frame, param);
     glutSwapBuffers();
@@ -138,7 +152,7 @@ int initWindow(int argc, char** argv)
 void timer(int value)
 {
     frame++;
-    printf("Frame: %d\n", frame);
+    //printf("Frame: %d\n", frame);
     glutPostRedisplay();
     glutTimerFunc(TIMER_INTERVAL, &timer, 0);
 }
