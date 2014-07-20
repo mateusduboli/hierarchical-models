@@ -9,7 +9,7 @@
 
 const int GL_HEIGHT = 500;
 const int GL_WIDTH  = GL_HEIGHT;
-const int TIMER_INTERVAL = 100;
+const int TIMER_INTERVAL = 50;
 const int ANGLE_STEP = 2;
 const double CAMERA_STEP = 0.5;
 const double PARAM_STEP = 0.1;

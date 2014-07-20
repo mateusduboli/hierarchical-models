@@ -14,31 +14,37 @@ void feet(Side side, int frame, double param)
     glPopMatrix();
 }
 
-void thighs(Side side, int frame, double param)
+void knee(Side side, int frame, double param)
 {
     glPushMatrix();
         glBegin(GL_LINES);
             glVertex3d(0.0, 0.0, 0.0);
-            glVertex3d(0.0, -THIGHS_HEIGHT, 0.0);
+            glVertex3d(0.0, -KNEE_HEIGHT, 0.0);
         glEnd();
         glPushMatrix();
             glRotated(90, 0, 0, 0);
-            glutSolidCylinder(JOINT_SIZE, THIGHS_HEIGHT, 20, 20);
+            glutSolidCylinder(JOINT_SIZE, KNEE_HEIGHT, 20, 20);
         glPopMatrix();
-        glTranslatef(0.0, -THIGHS_HEIGHT - JOINT_SIZE, 0.0);
+        glTranslatef(0.0, -KNEE_HEIGHT - JOINT_SIZE, 0.0);
         glutSolidSphere(JOINT_SIZE, 30, 30);
         glTranslated(0.0, -JOINT_SIZE, 0.0);
+        glRotated(movement(KNEE, side, frame), 0, 0, 1);
         feet(side, frame, param);
     glPopMatrix();
 }
 
 void hips(Side side, int frame, double param)
 {
+    glBegin(GL_LINES);
+        glVertex3d(0.0, 0, TORSO_DEPTH);
+        glVertex3d(0.0, -HIPS_HEIGHT, 0.0);
+    glEnd();
     glPushMatrix();
         glTranslatef(0.0, -HIPS_HEIGHT -JOINT_SIZE, 0.0);
         glutSolidSphere(JOINT_SIZE, 30, 30);
         glTranslatef(0.0, -JOINT_SIZE, 0.0);
-        thighs(side, frame, param);
+        glRotated(movement(HIPS, side, frame), 0, 0, 1);
+        knee(side, frame, param);
     glPopMatrix();
 }
 
@@ -70,6 +76,7 @@ void wrist(Side side, int frame, double param)
         glTranslatef(0.0, -WRIST_HEIGHT -JOINT_SIZE, 0.0);
         glutSolidSphere(JOINT_SIZE, 30, 30);
         glTranslatef(0.0, -JOINT_SIZE, 0.0);
+        glRotated(movement(WRIST, side, frame), 0, 0, 1);
         hands(side, frame, param);
     glPopMatrix();
 }
@@ -88,6 +95,7 @@ void elbow(Side side, int frame, double param)
         glTranslatef(0.0, -ELBOW_HEIGHT -JOINT_SIZE, 0.0);
         glutSolidSphere(JOINT_SIZE, 30, 30);
         glTranslatef(0.0, -JOINT_SIZE, 0.0);
+        glRotated(movement(ELBOW, side, frame), 0, 0, 1);
         wrist(side, frame, param);
     glPopMatrix();
 }
@@ -99,6 +107,7 @@ void shoulder(Side side, int frame, double param)
         glTranslatef(0.0, -SHOULDER_HEIGHT -JOINT_SIZE, 0.0);
         glutSolidSphere(JOINT_SIZE, 30, 30);
         glTranslatef(0.0, -JOINT_SIZE, 0.0);
+        glRotated(movement(SHOULDER, side, frame), 0, 0, 1);
         elbow(side, frame, param);
     glPopMatrix();
 }
@@ -106,6 +115,7 @@ void shoulder(Side side, int frame, double param)
 void trunk(int frame, double param)
 {
     glPushMatrix();
+        glRotated(movement(TRUNK, 0, frame), 0, 0, 1);
         glBegin(GL_LINES);
             glVertex3d(0.0, 0.0, 0.0);
             glVertex3d(TRUNK_HEIGHT * 0.5, 0.0, 0.0);
@@ -118,6 +128,7 @@ void trunk(int frame, double param)
         glutSolidSphere(JOINT_SIZE, 30, 30);
         glTranslatef(JOINT_SIZE, 0.0, 0.0);
         glPushMatrix();
+            glRotated(movement(TRUNK, 1, frame), 0, 0, 1);
             glBegin(GL_LINES);
                 glVertex3d(0.0, 0.0, 0.0);
                 glVertex3d(TRUNK_HEIGHT * 0.5, 0.0, 0.0);
@@ -152,6 +163,7 @@ void head(int frame, double param)
 void tail(int frame, double param)
 {
     glPushMatrix();
+        glRotated(movement(TAIL, 0, frame), 0, 0, 1);
         glRotated(255, 0, 0, 1);
         glBegin(GL_LINES);
             glVertex3d(0.0, 0.0, 0.0);
@@ -166,7 +178,6 @@ void tail(int frame, double param)
 
 void solid_elephant(int frame, double param)
 {
-    glMatrixMode(GL_MODELVIEW);
     glColor3d(0.8, 0.8, 0.8);
     glPushMatrix();
         glBegin(GL_LINES);
@@ -218,10 +229,6 @@ void solid_elephant(int frame, double param)
         glPopMatrix();
         glPushMatrix();
             glTranslated(HIPS_X, TORSO_HEIGHT, -TORSO_DEPTH);
-            glBegin(GL_LINES);
-                glVertex3d(0.0, 0, TORSO_DEPTH);
-                glVertex3d(0.0, -HIPS_HEIGHT, 0.0);
-            glEnd();
             hips(LEFT, frame, param);
         glPopMatrix();
     glPopMatrix();

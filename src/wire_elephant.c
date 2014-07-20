@@ -23,7 +23,6 @@ void wire_thighs(int index, double param)
         glEnd();
         glTranslatef(0.0, -THIGHS_HEIGHT, 0.0);
         glutSolidSphere(JOINT_SIZE, 30, 30);
-        glRotatef(movementAngle(THIGHTS, index, _frame), 0.0, 0.0, 1.0);
         wire_feet(index, param);
     glPopMatrix();
 }
@@ -38,7 +37,6 @@ void wire_shoulder(int index, double param)
         glEnd();
         glTranslatef(0.0, -SHOULDER_HEIGHT-displac, 0.0);
         glutSolidSphere(JOINT_SIZE, 30, 30);
-        glRotatef(movementAngle(SHOULDER, index, _frame), 0.0, 0.0, 1.0);
         wire_thighs(index, param);
     glPopMatrix();
 }
