@@ -7,8 +7,8 @@
 #include <stdbool.h>
 #include "elephant.h"
 
-const int GL_HEIGHT = 500;
-const int GL_WIDTH  = GL_HEIGHT;
+#define GL_HEIGHT 500
+#define GL_WIDTH GL_HEIGHT
 const int TIMER_INTERVAL = 50;
 const double CAMERA_STEP = 1;
 
@@ -85,9 +85,9 @@ void initLights()
     glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
     glLightfv(GL_LIGHT0, GL_POSITION, position);
 
-    //glEnable(GL_LIGHTING);
-    //glEnable(GL_LIGHT0);
-    //glEnable(GL_COLOR_MATERIAL);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    glEnable(GL_COLOR_MATERIAL);
 }
 
 void draw()

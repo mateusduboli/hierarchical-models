@@ -22,11 +22,11 @@ typedef enum {
     LEFT
 } Side;
 
-static const int FRAMES = 4;
-static const int DISPLAY_FRAMES = 80;
-static const int FRAME_INTERVAL = 20;
-static const int BODY_PARTS = 9;
-static const int SIDES = 2;
+#define FRAMES 4
+#define DISPLAY_FRAMES 80
+#define FRAME_INTERVAL 20
+#define BODY_PARTS 9
+#define SIDES 2
 
 static double RAISING[BODY_PARTS][SIDES][FRAMES] = {
     { //Hips
