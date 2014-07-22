@@ -177,7 +177,7 @@ void elephant(int frame)
     glPushMatrix();
         double angle = movement(TORSO, 0, frame);
         double displ_y = sin(DEGREES(angle))*TORSO_HEIGHT;
-        double displ_x = -cos(DEGREES((90 - angle)))*TORSO_HEIGHT;
+        double displ_x = cos(DEGREES((90 + angle)))*TORSO_HEIGHT;
         glTranslated(displ_x, displ_y, 0);
         glRotated(angle, 0, 0, 1);
         glBegin(GL_LINES);
