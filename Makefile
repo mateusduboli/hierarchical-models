@@ -1,13 +1,15 @@
-LDLIBS= -lm -lglut -lglu -lgl
 LDFLAGS= -L'/usr/X11/lib'
-CFLAGS= -I'include' -I'/usr/X11/include'
+CFLAGS= -I'/usr/X11/include'
+
+LDLIBS= -lm -lglut -lglu -lgl
+CFLAGS+= -I'include'
 TARGET=model
 
 vpath %.c src
 
 all: $(TARGET)
 
-${TARGET}: movement.o elephant.o solid_elephant.o wire_elephant.o
+${TARGET}: movement.o elephant.o
 
 run: all
 	./$(TARGET)

@@ -1,18 +1,16 @@
-#ifndef __ELEPHANT__
-#define __ELEPHANT__
+#ifndef __SOLID_ELEPHANT__
+#define __SOLID_ELEPHANT__
 
 #include <math.h>
 
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
+#include <GL/freeglut.h>
 
 #include "sizes.h"
 #include "movement.h"
 
-#include "solid_elephant.h"
-#include "wire_elephant.h"
+void elephant(int frame);
 
-void elephant(int wired, int frame, double param);
-
-#endif // __ELEPHANT__
+#endif // __SOLID_ELEPHANT__
