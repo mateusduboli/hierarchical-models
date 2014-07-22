@@ -10,8 +10,7 @@
 const int GL_HEIGHT = 500;
 const int GL_WIDTH  = GL_HEIGHT;
 const int TIMER_INTERVAL = 50;
-const int ANGLE_STEP = 2;
-const double CAMERA_STEP = 0.5;
+const double CAMERA_STEP = 1;
 const double PARAM_STEP = 0.1;
 
 int window = 0;
@@ -46,6 +45,14 @@ void commandKeys(unsigned char key, int x, int y)
             break;
         case 'x':
             camera_z-=CAMERA_STEP;
+            break;
+        case 'w':
+            walking();
+            frame=0;
+            break;
+        case 'r':
+            raising();
+            frame=0;
             break;
     }
     printf("Camera Pos (%f, %f, %f)\n", camera_x, camera_y, camera_z);
@@ -165,6 +172,7 @@ int main(int argc, char** argv)
     glutSpecialFunc(&movementKeys);
     glutDisplayFunc(&draw);
     glutTimerFunc(TIMER_INTERVAL, &timer, 0);
+    glEnable(GL_DEPTH_TEST);
     glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
