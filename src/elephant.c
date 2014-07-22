@@ -173,9 +173,13 @@ void tail(int frame)
 
 void elephant(int frame)
 {
-    glColor3d(0.8, 0.8, 0.8);
+    glColor3d(0.6, 0.6, 0.6);
     glPushMatrix();
-        glRotated(movement(TORSO, 0, frame), 0, 0, 1);
+        double angle = movement(TORSO, 0, frame);
+        double displ_y = sin(DEGREES(angle))*TORSO_HEIGHT;
+        double displ_x = -cos(DEGREES((90 - angle)))*TORSO_HEIGHT;
+        glTranslated(displ_x, displ_y, 0);
+        glRotated(angle, 0, 0, 1);
         glBegin(GL_LINES);
             glVertex3d(TORSO_WIDTH * 0.5, TORSO_HEIGHT, 0.0);
             glVertex3d(-TORSO_WIDTH * 0.5, TORSO_HEIGHT, 0.0);
